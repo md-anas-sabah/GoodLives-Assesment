@@ -16,9 +16,9 @@ const Graph = () => {
     const fetchData = async () => {
       try {
         setTimeout(async () => {
-          const response = await axios.get("/chartData.json");
+          const response = await axios.get("./chartData.json");
           setData(response.data);
-        }, 4000); // 4 seconds delay
+        }, 3000);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +29,7 @@ const Graph = () => {
 
   if (!data.length) {
     return (
-      <div className=" w-[700px] bg-gray-500 border border-[rgba(218, 227, 248, 1)] p-[0.8vw] h-[350px] mt-[15px] rounded-lg animate-pulse"></div>
+      <div className=" w-[700px] bg-gray-500 border border-[rgba(218, 227, 248, 1)] p-[0.8vw] h-full mt-[15px] rounded-lg animate-pulse"></div>
     );
   }
 
@@ -37,47 +37,10 @@ const Graph = () => {
     setTitleIndex(index);
   };
 
-  const options = {
-    chart: {
-      id: "area-chart",
-      toolbar: {
-        show: false,
-      },
-    },
-    xaxis: {
-      categories: Object.keys(data[titleIndex][changeCalender]),
-      labels: {
-        style: {
-          fontSize: "1vw",
-          fontWeight: 500,
-          color: "rgba(11, 28, 51, 0.7)",
-        },
-      },
-    },
-    series: [
-      {
-        name: data[titleIndex].title,
-        data: Object.values(data[titleIndex][changeCalender]),
-      },
-    ],
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: "straight",
-      width: 2,
-      colors: ["rgb(55, 136, 229)"],
-    },
-    fill: {
-      type: "gradient",
-      colors: ["rgb(55, 136, 229)"],
-    },
-  };
-
   return (
     <div className=" w-[700px] bg-white border border-[rgba(218, 227, 248, 1)] p-[0.8vw] rounded-lg h-[350px] mt-[15px]">
-      <div className="Chart-header">
-        <p className="font-bold text-sm">HEALTH MONITORING</p>
+      <div className="flex justify-between items-center w-full mb-[1vw]">
+        <p className="text-sm text-gray-400">HEALTH MONITORING</p>
         <div className="text-[1vw] font-medium border border-[rgba(218, 227, 248, 1)] rounded-sm py-[0.3vw] px-[0.2vw]">
           <select
             value={changeCalender}
@@ -102,22 +65,57 @@ const Graph = () => {
             key={index}
             onClick={() => handleTitleChange(index)}
           >
-            {index === 0 ? (
-              <TbHeartBolt />
-            ) : index === 1 ? (
-              <RiPulseLine />
-            ) : index === 2 ? (
-              <TbTemperature />
-            ) : (
-              <AiOutlineFire />
-            )}
-            <p className="m-0">{item.title}</p>
+            {index === 0 && <TbHeartBolt />}
+            {index === 1 && <RiPulseLine />}
+            {index === 2 && <TbTemperature />}
+            {index === 3 && <AiOutlineFire />}
+            <p>{item.title}</p>
           </div>
         ))}
       </div>
       <Chart
-        options={options}
-        series={options.series}
+        options={{
+          chart: {
+            id: "area-chart",
+            toolbar: {
+              show: false,
+            },
+          },
+          xaxis: {
+            categories: Object.keys(data[titleIndex][changeCalender]),
+            labels: {
+              style: {
+                fontSize: "1vw",
+                fontWeight: 500,
+                color: "rgba(11, 28, 51, 0.7)",
+              },
+            },
+          },
+          series: [
+            {
+              name: data[titleIndex].title,
+              data: Object.values(data[titleIndex][changeCalender]),
+            },
+          ],
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            curve: "straight",
+            width: 2,
+            colors: ["rgb(55, 136, 229)"],
+          },
+          fill: {
+            type: "gradient",
+            colors: ["rgb(55, 136, 229)"],
+          },
+        }}
+        series={[
+          {
+            name: data[titleIndex].title,
+            data: Object.values(data[titleIndex][changeCalender]),
+          },
+        ]}
         type="area"
         height={200}
       />

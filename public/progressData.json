@@ -8,16 +8,16 @@
   },
   {
     "name": "SLEEP",
-    "daily": 25,
-    "weekly": 52,
+    "daily": 52,
+    "weekly": 24,
     "monthly": 79,
     "yearly": 100
   },
   {
     "name": "WELLNESS",
-    "daily": 25,
+    "daily": 79,
     "weekly": 52,
-    "monthly": 79,
+    "monthly": 25,
     "yearly": 100
   }
 ]

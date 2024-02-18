@@ -1,170 +1,99 @@
-import React from "react";
-
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 function ProgressChart() {
-  const [progressData, setProgressData] = React.useState(null);
-  const [dropdownValue, setDropdownValue] = React.useState([
+  const [progressData, setProgressData] = useState(null);
+  const [dropdownValue, setDropdownValue] = useState([
     "Daily",
     "Daily",
     "Daily",
   ]);
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  const timeline = ["Daily", "Weekly", "Monthly", "Yearly"];
+
+  useEffect(() => {
     const fetchData = async () => {
-      setTimeout(() => {
-        fetch("/progressData.json")
-          .then((response) => response.json())
-          .then((data) => {
-            setProgressData(data);
-            setLoading(false);
-          })
-          .catch((error) => console.log(error));
-      }, 2000);
+      setTimeout(async () => {
+        try {
+          const response = await axios.get("./progressData.json");
+          setProgressData(response.data);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      }, 3000);
     };
     fetchData();
   }, []);
+
+  const renderProgressBars = () => {
+    if (!progressData) return null;
+
+    return progressData.map((item, index) => (
+      <div
+        className="flex flex-col items-center justify-center bg-[white] border border-[rgba(218, 227, 248, 1)] rounded-lg p-[0.8vw] w-[15vw]"
+        key={item.name}
+      >
+        <div className="Chart-header text-[1vw] font-medium  m-0 flex justify-between items-center w-full mb-[1vw]">
+          <p className="text-gray-500 text-sm">{item.name}</p>
+          <div className="text-[1vw] font-medium border border-[rgba(218, 227, 248, 1)] py-[0.3vw] px-[0.2vw]">
+            <select
+              value={dropdownValue[index]}
+              onChange={(e) => {
+                const newArr = [...dropdownValue];
+                newArr[index] = e.target.value;
+                setDropdownValue(newArr);
+              }}
+            >
+              {timeline.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div>
+          <CircularProgressbar
+            value={item[dropdownValue[index].toLowerCase()]}
+            text={`${item[dropdownValue[index].toLowerCase()]}%`}
+            styles={{
+              path: {
+                stroke:
+                  item[dropdownValue[index].toLowerCase()] >= 70
+                    ? "#23af6b"
+                    : item[dropdownValue[index].toLowerCase()] >= 50
+                    ? "#f3a736"
+                    : "#f53360",
+                strokeWidth: 7,
+              },
+              trail: {
+                stroke: "rgba(242, 245, 250, 1)",
+                strokeWidth: 7,
+              },
+              text: {
+                fill: "rgba(11, 28, 51, 1)",
+                fontSize: "1.5vw",
+              },
+            }}
+            width={50}
+            height={50}
+          />
+        </div>
+      </div>
+    ));
+  };
+
   return (
     <>
       {!loading ? (
-        <div className="progress">
-          {progressData &&
-            progressData.map((item, index) => {
-              return (
-                <div className="progress-item" key={item.name}>
-                  <div className="Chart-header">
-                    <p>{item.name}</p>
-                    <div className="dropdown">
-                      <select
-                        value={dropdownValue[index]}
-                        onChange={(e) => {
-                          const newArr = [...dropdownValue];
-                          newArr[index] = e.target.value;
-                          setDropdownValue(newArr);
-                        }}
-                      >
-                        <option value="Daily">Daily</option>
-                        <option value="Weekly">Weekly</option>
-                        <option value="Monthly">Monthly</option>
-                        <option value="Yearly">Yearly</option>
-                      </select>
-                    </div>
-                  </div>
-                  {dropdownValue[index] === "Daily" ? (
-                    <div className="progess-bar">
-                      <CircularProgressbar
-                        value={item.daily}
-                        text={`${item.daily}%`}
-                        styles={{
-                          path: {
-                            stroke:
-                              item.daily >= 70
-                                ? "rgba(39, 164, 104, 1)"
-                                : item.daily >= 50
-                                ? "rgba(242, 167, 53, 1)"
-                                : "rgba(229, 55, 97, 1)",
-                          },
-                          trail: {
-                            stroke: "rgba(242, 245, 250, 1)",
-                            strokeWidth: 7,
-                          },
-                          text: {
-                            fill: "rgba(11, 28, 51, 1)",
-                            fontSize: "1.5vw",
-                          },
-                        }}
-                      />
-                    </div>
-                  ) : dropdownValue[index] === "Weekly" ? (
-                    <div className="progess-bar">
-                      <CircularProgressbar
-                        value={item.weekly}
-                        text={`${item.weekly}%`}
-                        styles={{
-                          path: {
-                            stroke:
-                              item.weekly >= 70
-                                ? "rgba(39, 164, 104, 1)"
-                                : item.weekly >= 50
-                                ? "rgba(242, 167, 53, 1)"
-                                : "rgba(229, 55, 97, 1)",
-                            strokeWidth: 7,
-                          },
-                          trail: {
-                            stroke: "rgba(242, 245, 250, 1)",
-                            strokeWidth: 7,
-                          },
-                          text: {
-                            fill: "rgba(11, 28, 51, 1)",
-                            fontSize: "1.5vw",
-                          },
-                        }}
-                      />
-                    </div>
-                  ) : dropdownValue[index] === "Monthly" ? (
-                    <div className="progess-bar">
-                      <CircularProgressbar
-                        value={item.monthly}
-                        text={`${item.monthly}%`}
-                        styles={{
-                          path: {
-                            stroke:
-                              item.monthly >= 70
-                                ? "rgba(39, 164, 104, 1)"
-                                : item.monthly >= 50
-                                ? "rgba(242, 167, 53, 1)"
-                                : "rgba(229, 55, 97, 1)",
-                            strokeWidth: 7,
-                          },
-                          trail: {
-                            stroke: "rgba(242, 245, 250, 1)",
-                            strokeWidth: 7,
-                          },
-                          text: {
-                            fill: "rgba(11, 28, 51, 1)",
-                            fontSize: "1.5vw",
-                          },
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="progess-bar">
-                      <CircularProgressbar
-                        value={item.yearly}
-                        text={`${item.yearly}%`}
-                        styles={{
-                          path: {
-                            stroke:
-                              item.yearly >= 70
-                                ? "rgba(39, 164, 104, 1)"
-                                : item.yearly >= 50
-                                ? "rgba(242, 167, 53, 1)"
-                                : "rgba(229, 55, 97, 1)",
-                            strokeWidth: 7,
-                          },
-                          trail: {
-                            stroke: "rgba(242, 245, 250, 1)",
-                            strokeWidth: 7,
-                          },
-                          text: {
-                            fill: "rgba(11, 28, 51, 1)",
-                            fontSize: "1.5vw",
-                          },
-                        }}
-                        width={50}
-                        height={50}
-                      />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+        <div className="flex justify-evenly items-center w-[700px] gap-[1vw]">
+          {renderProgressBars()}
         </div>
-      ) : (
-        <div className="Loading">Loading...</div>
-      )}
+      ) : null}
     </>
   );
 }
