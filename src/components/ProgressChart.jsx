@@ -38,8 +38,8 @@ function ProgressChart() {
         key={item.name}
       >
         <div className="Chart-header text-[1vw] font-medium  m-0 flex justify-between items-center w-full mb-[1vw]">
-          <p className="text-gray-500 text-sm">{item.name}</p>
-          <div className="text-[1vw] font-medium border border-[rgba(218, 227, 248, 1)] py-[0.3vw] px-[0.2vw]">
+          <p className="text-gray-500 text-xs font-semibold">{item.name}</p>
+          <div className="text-[1vw] font-medium dropdown border border-[rgba(218, 227, 248, 1)] py-[0.3vw] px-[0.2vw]">
             <select
               value={dropdownValue[index]}
               onChange={(e) => {
