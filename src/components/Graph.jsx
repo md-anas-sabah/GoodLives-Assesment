@@ -38,7 +38,7 @@ const Graph = () => {
   };
 
   return (
-    <div className=" w-[635px] bg-white border border-[rgba(218, 227, 248, 1)] p-[0.8vw] rounded-lg h-[350px] mt-[15px]">
+    <div className=" w-[635px] bg-white border border-[rgba(218, 227, 248, 1)] p-[0.8vw] rounded-lg h-[390px] mt-[15px]">
       <div className="flex justify-between items-center w-full mb-[1vw]">
         <p className="text-xs text-gray-500 font-semibold">HEALTH MONITORING</p>
         <div className="text-[1vw] dropdown font-medium border border-[rgba(218, 227, 248, 1)] rounded-sm py-[0.3vw] px-[0.2vw]">
@@ -117,7 +117,7 @@ const Graph = () => {
           },
         ]}
         type="area"
-        height={200}
+        height={250}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { IoMdSearch } from "react-icons/io";
 
 const Vaccination = ({ title, filtersNames }) => {
   return (
-    <div className="flex-1 border border-solid border-gray-300 bg-white rounded-xl">
+    <div className="flex-1 h-[40rem] border border-solid border-gray-300 bg-white rounded-xl">
       <div className="py-3 px-5 flex w-full justify-between items-center">
         <p className="text-xs text-gray-500 font-bold uppercase">{title}</p>
         <div className="flex items-center gap-3">

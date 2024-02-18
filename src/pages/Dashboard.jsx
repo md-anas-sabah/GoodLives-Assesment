@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <div className="h-screen flex flex-col gap-4">
       <Navbar />
-      <div className="flex">
+      <div className="flex h-full">
         <div className="flex flex-col px-4">
           <ProgressChart />
           <Graph />
