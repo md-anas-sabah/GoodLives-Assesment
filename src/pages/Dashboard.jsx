@@ -5,7 +5,7 @@ import Vaccination from "../components/Vaccination";
 import Graph from "../components/Graph";
 function Dashboard() {
   return (
-    <div className="h-full flex flex-col gap-4">
+    <div className="h-screen flex flex-col gap-4">
       <Navbar />
       <div className="flex">
         <div className="flex flex-col px-4">
