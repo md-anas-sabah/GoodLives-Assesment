@@ -3,13 +3,11 @@ import { useState, useEffect } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+const intialDropDown = ["Daily", "Daily", "Daily"];
+
 function ProgressChart() {
   const [progressData, setProgressData] = useState(null);
-  const [dropdownValue, setDropdownValue] = useState([
-    "Daily",
-    "Daily",
-    "Daily",
-  ]);
+  const [dropdownValue, setDropdownValue] = useState(intialDropDown);
   const [loading, setLoading] = useState(true);
 
   const timeline = ["Daily", "Weekly", "Monthly", "Yearly"];
