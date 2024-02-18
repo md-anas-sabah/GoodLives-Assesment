@@ -88,7 +88,7 @@ function ProgressChart() {
   return (
     <>
       {!loading ? (
-        <div className="flex justify-evenly items-center w-[700px] gap-[1vw]">
+        <div className="flex justify-evenly items-center w-[650px] gap-[1vw]">
           {renderProgressBars()}
         </div>
       ) : null}
