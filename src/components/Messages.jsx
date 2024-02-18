@@ -4,7 +4,7 @@ function Messages({ name, message, time, notification, image }) {
   return (
     <div className="flex gap-1 items-center">
       <div className="relative w-10">
-        <img src={image} alt="user" className="h-12 w-12 rounded-lg object-cover" />
+        <img src={image} alt="user" className="h-10 rounded-lg object-cover" />
         <div className="h-2 w-2 p-[5px] absolute top-0 right-0 bg-green-400 rounded-full"></div>
       </div>
 
