@@ -5,14 +5,14 @@ import Vaccination from "../components/Vaccination";
 import Graph from "../components/Graph";
 function Dashboard() {
   return (
-    <div className="h-screen flex flex-col gap-4">
+    <div className=" flex flex-col gap-4">
       <Navbar />
       <div className="flex h-full">
         <div className="flex flex-col px-4">
           <ProgressChart />
           <Graph />
         </div>
-        <div className="flex flex-col gap-3 w-full mr-10">
+        <div className="flex flex-col max-h-[27rem] gap-3 w-full mr-10">
           <Vaccination
             title={"Vaccination schedule"}
             filtersNames={"By type"}

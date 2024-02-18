@@ -35,7 +35,7 @@ function ProgressChart() {
         className="flex flex-col items-center justify-center bg-[white] border border-[rgba(218, 227, 248, 1)] rounded-lg p-[0.8vw] w-[15vw]"
         key={item.name}
       >
-        <div className="Chart-header text-[1vw] font-medium  m-0 flex justify-between items-center w-full mb-[1vw]">
+        <div className="Chart-header text-[1vw] font-medium  m-0 flex justify-between items-center w-full h-12 mb-[2px]">
           <p className="text-gray-500 text-xs font-semibold">{item.name}</p>
           <div className="text-[1vw] font-medium dropdown border border-[rgba(218, 227, 248, 1)] py-[0.3vw] px-[0.2vw]">
             <select
@@ -88,7 +88,7 @@ function ProgressChart() {
   return (
     <>
       {!loading ? (
-        <div className="flex justify-evenly items-center w-[635px] gap-[1vw]">
+        <div className="flex justify-evenly items-center w-[635px] gap-2">
           {renderProgressBars()}
         </div>
       ) : null}
