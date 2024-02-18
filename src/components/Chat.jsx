@@ -6,7 +6,7 @@ import user4 from "../assets/user4.jpg";
 
 const Chat = () => {
   return (
-    <div className="flex-1 border border-solid border-gray-300 bg-white rounded-xl mt-3">
+    <div className="flex-1 border border-solid border-gray-300 bg-white rounded-xl mt-2">
       <div className="px-5 py-3 flex w-full justify-between items-center">
         <p className="text-xs text-gray-500 font-bold uppercase">{"Chat"}</p>
       </div>

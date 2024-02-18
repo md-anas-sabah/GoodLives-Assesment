@@ -12,7 +12,7 @@ function Dashboard() {
           <ProgressChart />
           <Graph />
         </div>
-        <div className="flex flex-col max-h-[30rem] gap-3 w-full mr-10">
+        <div className="flex flex-col min-h-[30rem] gap-3 w-full mr-10">
           <Vaccination
             title={"Vaccination schedule"}
             filtersNames={"By type"}
